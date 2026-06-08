@@ -16,7 +16,7 @@ export const ChatReceitas = (): JSX.Element => {
     // Mensagem inicial da IA padão
     {
       id: 1,
-      texto: "Bem-vindo(a) qual sua vontade hoje?",
+      texto: "Bem-vindo(a) Oquê você deseja hoje?",
       remetente: "ia",
     },
   ]);
@@ -84,7 +84,13 @@ export const ChatReceitas = (): JSX.Element => {
       };
       setPergunta((prev) => [...prev, novaMensagemIA]);
     } catch (error) {
-      alert("Ocorreu um erro ao enviar a mensagem.");
+      alert("Ocorreu um erro..Gemini instável no momento. Tente novamente mais tarde.");
+       const erroMensagem: Mensagem = {
+        id: Date.now() + 1,
+        texto: "Erro inesperado. Tente novamente mais tarde...💀",
+        remetente: "ia",
+      };
+      setPergunta((prev) => [...prev, erroMensagem]);
       console.error("Erro ao enviar mensagem:", error);
     } finally {
       setLoading(false);
@@ -102,7 +108,7 @@ export const ChatReceitas = (): JSX.Element => {
         </header>
 
         <div className="bg-white/70 backdrop-blur-sm rounded-2xl overflow-hidden shadow-xl flex flex-col h-[70vh] border border-gray-300">
-          <ListaMenssagen pergunta={pergunta} />
+          <ListaMenssagen pergunta={pergunta} loading={loading} />
           <ChatBox onEnviarMensagem={onEnviarMensagem} desabilitado={loading} />
         </div>
       </div>

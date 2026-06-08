@@ -6,7 +6,10 @@ interface Mensagem {
   remetente: "usuario" | "ia";
 }
 
-export const Menssagem = ({ pergunta }: { pergunta: Mensagem }): JSX.Element => {
+//OBS: apenas para remover aviso de prop não usado
+type Props = { pergunta: Mensagem; loading?: boolean };
+
+export const Menssagem = ({ pergunta }: Props): JSX.Element => {
   const isIA = pergunta.remetente === "ia";
 
   return (
